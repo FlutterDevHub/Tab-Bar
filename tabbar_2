@@ -105,3 +105,73 @@ class SelectedTabBar extends StatelessWidget {
               },
             ),
           ), */
+
+
+
+
+/* ---------------Without ListView Custom Class---------------*/
+
+/*
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:wo_flutter/core/extensions/extension.dart';
+import 'package:wo_flutter/core/utils/constant/app_colors.dart';
+import 'package:wo_flutter/models/selected_tabbar_item_model.dart';
+
+class SelectedTab extends StatelessWidget {
+  final String title;
+  final int index;
+  final bool isSelected;
+  final VoidCallback onTap;
+  final String? image;
+
+  const SelectedTab({
+    super.key,
+    required this.title,
+    required this.index,
+    required this.isSelected,
+    required this.onTap,
+    this.image,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+        decoration: BoxDecoration(
+          color: isSelected ? AppColors.primairyColor1 : Colors.white,
+          borderRadius: BorderRadius.circular(100),
+          border: Border.all(
+            color:
+                isSelected ? AppColors.primairyColor1 : AppColors.borderColor,
+          ),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (image != null) ...[
+              SvgPicture.asset(
+                image!,
+                height: 16,
+                width: 16,
+                color: isSelected ? Colors.white : AppColors.primairyColor1,
+              ),
+              1.w.widthBox,
+            ],
+            Text(
+              title,
+              style: TextStyle(
+                color: isSelected ? Colors.white : AppColors.primairyColor1,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+*/
