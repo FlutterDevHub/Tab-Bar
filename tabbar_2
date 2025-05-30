@@ -1,0 +1,107 @@
+/* --------------- TabBar Model ---------------*/
+class TabItem {
+  final String title;
+  final String? image;
+
+  TabItem({required this.title, this.image});
+}
+
+/* --------------- Class Of TabbarController ---------------*/
+class SelectedTabController extends GetxController {
+  RxInt selectedIndex = 0.obs;
+  final tabItem = <TabItem>[
+    TabItem(title: 'All',
+// image: 'assets/icons/photo.svg'
+),
+    TabItem(title: 'Photos'),
+    TabItem(title: 'Videos'),
+  ];
+  void changeTab(int index) {
+    selectedIndex.value = index;
+  }
+}
+
+
+/* ---------------Custom Class Of Tabbar ---------------*/
+
+class SelectedTabBar extends StatelessWidget {
+  final List<TabItem> tabs;
+  final int selectedIndex;
+  final Function(int) onTabSelected;
+
+  const SelectedTabBar({
+    super.key,
+    required this.tabs,
+    required this.selectedIndex,
+    required this.onTabSelected,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 44,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        itemCount: tabs.length,
+        itemBuilder: (context, index) {
+          final tab = tabs[index];
+          final isSelected = selectedIndex == index;
+
+          return GestureDetector(
+            onTap: () => onTabSelected(index),
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+              decoration: BoxDecoration(
+                color: isSelected ? AppColors.primairyColor1 : Colors.white,
+                borderRadius: BorderRadius.circular(100),
+                border: Border.all(
+                  color:
+                      isSelected
+                          ? AppColors.primairyColor1
+                          : AppColors.borderColor,
+                ),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (tab.image != null) ...[
+                    SvgPicture.asset(
+                      tab.image!,
+                      height: 16,
+                      width: 16,
+                      color:
+                          isSelected ? Colors.white : AppColors.primairyColor1,
+                    ),
+                    6.w.widthBox,
+                  ],
+                  Text(
+                    tab.title,
+                    style: TextStyle(
+                      color:
+                          isSelected ? Colors.white : AppColors.primairyColor1,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+/* ---------------How To Use SelectedTabBar in Your Class ---------------*/
+
+/* Obx(
+            () => SelectedTabBar(
+              tabs: controllerSelected.tabItem,
+              selectedIndex: controllerSelected.selectedIndex.value,
+              onTabSelected: (index) {
+                controllerSelected.selectedIndex.value = index;
+                controllerSelected.changeTab(index);
+              },
+            ),
+          ), */
